@@ -28,3 +28,13 @@ User.create(username: username, email: email, password: password, password_confi
   User.create(username: username, email: email, password: password, password_confirmation: password,
               first_name: first_name, last_name: last_name)
 end
+
+#Creating a Form_Template
+20.times do
+  title = Faker::HarryPotter.quote
+  description = Faker::HarryPotter.quote + Faker::HarryPotter.quote
+  offset = rand(User.count)
+  user = User.offset(offset).limit(1).first
+
+  FormTemplate.create(title: title, description: description, user: user)
+end
