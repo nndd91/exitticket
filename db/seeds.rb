@@ -38,3 +38,13 @@ end
 
   FormTemplate.create(title: title, description: description, user: user)
 end
+
+20.times do
+  label = Faker::HarryPotter.quote
+  qns_type = Faker::Number.between(1, 1)
+  options = Faker::HarryPotter.quote + Faker::HarryPotter.quote
+  offset = rand(FormTemplate.count)
+  form_template = FormTemplate.offset(offset).limit(1).first
+
+  Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+end
