@@ -39,6 +39,7 @@ end
   FormTemplate.create(title: title, description: description, user: user)
 end
 
+# Creating Questions
 40.times do
   label = Faker::HarryPotter.quote
   qns_type = Faker::Number.between(1, 1)
@@ -49,6 +50,7 @@ end
   Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
 end
 
+# Creating Form
 20.times do
   title = Faker::HarryPotter.quote
   description = Faker::HarryPotter.quote + Faker::HarryPotter.quote
@@ -59,4 +61,17 @@ end
   form_date = Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today)
 
   Form.create(title: title, description: description, user: user, form_template: form_template, form_date: form_date)
+end
+
+# Creating Answers
+40.times do
+  content = Faker::HarryPotter.quote
+  offset = rand(User.count)
+  user = User.offset(offset).limit(1).first
+  offset = rand(Form.count)
+  form = Form.offset(offset).limit(1).first
+  offset = rand(Question.count)
+  question = Question.offset(offset).limit(1).first
+
+  Answer.create(content: content, user: user, form: form, question: question)
 end
