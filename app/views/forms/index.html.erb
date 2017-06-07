@@ -11,7 +11,11 @@
   <% @forms.each do |form| %>
     <tr>
       <td>
-        <b><%= form.title %></b><br />
+        <% if current_user == form.user || current_user.is_admin == true %>
+        <b><%= link_to form.title, form_path(form) %></b>
+        <% else %>
+        <b><%= form.title %></b>
+        <% end %><br />
         <%= form.description %>
       </td>
       <td>

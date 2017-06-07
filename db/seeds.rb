@@ -15,7 +15,7 @@ username = "Demo"
 is_admin = true
 
 User.create(username: username, email: email, password: password, password_confirmation: password,
-            first_name: first_name, last_name: last_name)
+            first_name: first_name, last_name: last_name, is_admin: is_admin)
 
 # Creating Remaining Users
 20.times do

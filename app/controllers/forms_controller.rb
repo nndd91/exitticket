@@ -1,8 +1,11 @@
 class FormsController < ApplicationController
+  before_action :setup_form, only: [:show, :attempt, :attemmping]
+
   def new
   end
 
   def show
+    @questions = @form.questions
   end
 
   def create
@@ -17,18 +20,14 @@ class FormsController < ApplicationController
   def edit
   end
 
-
-
   def index
     @forms = Form.all
   end
 
   def attempt
-    @form = Form.find(params[:id])
   end
 
   def attempting
-    @form = Form.find(params[:id])
 
     array = [:q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10]
     @form.questions.each_with_index do |question, index|
@@ -41,6 +40,10 @@ class FormsController < ApplicationController
   end
 
   private
+
+  def setup_form
+    @form = Form.find(params[:id])
+  end
 
   def attempting_params
   end
