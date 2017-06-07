@@ -6,7 +6,7 @@ This is an app to gather feedbacks from your users.
 
 ## ERD
 
-![ERD Diagram](https://github.com/nndd91/twitclone/blob/master/ERD.png?raw=true "Logo Title Text 1")
+![ERD Diagram](https://raw.githubusercontent.com/nndd91/exitticket/master/ERD.png "Logo Title Text 1")
 
 
 ## Getting Started
