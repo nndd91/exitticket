@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :forms do
     member do
       get 'attempt'
+      post 'attempting'
     end
   end
 end

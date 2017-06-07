@@ -1,2 +1,15 @@
-<h1>Forms#attempt</h1>
-<p>Find me in app/views/forms/attempt.html.erb</p>
+<h1><%= @form.title %></h1>
+<ul>
+<%= simple_form_for @form, url: attempting_form_path, method: :post do |f| %>
+  <% array = [:q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10] %>
+  <% @form.questions.each_with_index do |question, index| %>
+    <div class="form-inputs">
+      <li><%= question.label %></li>
+      <%= f.input array[index] %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+</ul>
