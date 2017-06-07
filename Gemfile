@@ -81,3 +81,5 @@ gem 'jquery-rails'
 gem 'rails_admin', '~> 1.2'
 # Official Sass port of Bootstrap 2 and 3.
 gem 'bootstrap-sass'
+# Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
+gem "cocoon"

@@ -59,6 +59,7 @@ GEM
       xpath (~> 2.0)
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.10)
     coderay (1.1.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -304,6 +305,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara (~> 2.13)
+  cocoon
   coffee-rails (~> 4.2)
   devise
   factory_girl_rails
