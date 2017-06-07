@@ -1,2 +1,10 @@
-<h1>Forms#new</h1>
-<p>Find me in app/views/forms/new.html.erb</p>
+<h1>New Form</h1>
+
+<%= simple_form_for @form do |f| %>
+  <%= f.input :form_template, collection: FormTemplate.all %>
+  <%= f.input :form_date, as: :date %>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text %>
+  <%= f.button :submit %>
+
+<% end %>

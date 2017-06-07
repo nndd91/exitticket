@@ -3,6 +3,7 @@ class FormsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    @form = current_user.forms.build
   end
 
   def show
@@ -10,6 +11,12 @@ class FormsController < ApplicationController
   end
 
   def create
+    @form = current_user.forms.build(form_params)
+    if @form.save
+      redirect_to form_path(@form)
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -48,5 +55,10 @@ class FormsController < ApplicationController
   end
 
   def attempting_params
+  end
+
+  def form_params
+    params.require(:form).permit(:form_template, :form_date, :title, :description)
+    params[:form][:form_template] = FormTemplate.find(params[:form][:form_template])
   end
 end
