@@ -1,13 +1,32 @@
-<h1>Forms#index</h1>
-<p>Find me in app/views/forms/index.html.erb</p>
+<h1>Forms index</h1>
 <table class="table">
+  <tr>
+    <th>Title and Description</th>
+    <th>Author</th>
+    <th>Date</th>
+    <th>Template Title</th>
+    <th>Attempt</th>
+
+  </tr>
   <% @forms.each do |form| %>
     <tr>
       <td>
-        <%= form.title %>
+        <b><%= form.title %></b><br />
+        <%= form.description %>
       </td>
       <td>
-        <%= form.title %>
+        <%= form.user.first_name %>
+      </td>
+      <td>
+        <%= form.form_date %>
+      </td>
+      <td>
+        <%= form.form_template.title %>
+      </td>
+      <td>
+        <!-- Click to attempt or already Done -->
+        Attempt now
+        <%= link_to 'Attempt Now',
       </td>
     <tr>
   <% end %>

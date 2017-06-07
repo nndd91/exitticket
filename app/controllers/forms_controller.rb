@@ -22,5 +22,6 @@ class FormsController < ApplicationController
   end
 
   def attempt
+    @form = Form.find(params[:id])
   end
 end
