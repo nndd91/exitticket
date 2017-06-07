@@ -1,5 +1,6 @@
 class FormsController < ApplicationController
   before_action :setup_form, only: [:show, :attempt, :attempting]
+  before_action :authenticate_user!
 
   def new
   end

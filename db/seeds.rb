@@ -58,14 +58,14 @@ form_template = FormTemplate.first
 Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
 
 label = "Any other comments or suggestions to improve the learning experience? Feel free to let us know what you enjoyed about it as well!"
-qns_type = 1
+qns_type = 3
 options = ""
 form_template = FormTemplate.first
 
 Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
 
 label = "Any questions about the learning objectives you would like the instructor to help clarify for you?"
-qns_type = 1
+qns_type = 3
 options = ""
 form_template = FormTemplate.first
 
@@ -96,7 +96,7 @@ end
   qns_type = Faker::Number.between(1, 1)
   options = Faker::HarryPotter.quote + Faker::HarryPotter.quote
   offset = rand(FormTemplate.count)
-  form_template = FormTemplate.offset(offset).limit(1).first
+  form_template = FormTemplate.offset(offset).limit(2).last
 
   Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
 end
@@ -120,9 +120,9 @@ end
   offset = rand(User.count)
   user = User.offset(offset).limit(1).first
   offset = rand(Form.count)
-  form = Form.offset(offset).limit(1).first
+  form = Form.offset(offset).limit(2).last
   offset = rand(Question.count)
-  question = Question.offset(offset).limit(1).first
+  question = Question.offset(offset).limit(2).last
 
   Answer.create(content: content, user: user, form: form, question: question)
 end
