@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607151158) do
+ActiveRecord::Schema.define(version: 20170607152508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20170607151158) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_form_templates_on_user_id"
+  end
+
+  create_table "forms", force: :cascade do |t|
+    t.bigint "form_template_id"
+    t.bigint "user_id"
+    t.date "form_date"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_template_id"], name: "index_forms_on_form_template_id"
+    t.index ["user_id"], name: "index_forms_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -73,5 +85,7 @@ ActiveRecord::Schema.define(version: 20170607151158) do
   end
 
   add_foreign_key "form_templates", "users"
+  add_foreign_key "forms", "form_templates"
+  add_foreign_key "forms", "users"
   add_foreign_key "questions", "form_templates"
 end
