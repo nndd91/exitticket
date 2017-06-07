@@ -29,6 +29,57 @@ User.create(username: username, email: email, password: password, password_confi
               first_name: first_name, last_name: last_name)
 end
 
+# Create Exit Ticket
+title = "Exit Ticket Template"
+description = "To find out how you are doing in class"
+user = User.first
+
+FormTemplate.create(title: title, description: description, user: user)
+
+label = "My instructor(s) was effective in helping me achieve the learning objectives of the class."
+qns_type = 2
+options = ""
+form_template = FormTemplate.first
+
+Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+
+label = "The lesson was well-planned and sufficient time was given for each activity."
+qns_type = 2
+options = ""
+form_template = FormTemplate.first
+
+Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+
+label = "I found the learning objectives useful and I understand how it fits into the bigger picture of web development "
+qns_type = 2
+options = ""
+form_template = FormTemplate.first
+
+Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+
+label = "Any other comments or suggestions to improve the learning experience? Feel free to let us know what you enjoyed about it as well!"
+qns_type = 1
+options = ""
+form_template = FormTemplate.first
+
+Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+
+label = "Any questions about the learning objectives you would like the instructor to help clarify for you?"
+qns_type = 1
+options = ""
+form_template = FormTemplate.first
+
+Question.create(form_template: form_template, qns_type: qns_type, label: label, options: options)
+
+title = "Exit Ticket Week 6 Day 4"
+description = "To find out how students are doing"
+user = User.first
+form_template = FormTemplate.first
+form_date = Faker::Date.forward(1)
+
+Form.create(title: title, description: description, user: user, form_template: form_template, form_date: form_date)
+
+# Additional Data!
 #Creating a Form_Template
 20.times do
   title = Faker::HarryPotter.quote

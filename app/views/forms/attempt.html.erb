@@ -5,7 +5,14 @@
   <% @form.questions.each_with_index do |question, index| %>
     <div class="form-inputs">
       <li><%= question.label %></li>
-      <%= f.input array[index] %>
+      <% case question.qns_type %>
+      <% when 1 %>
+        number 1!
+        <%= f.input array[index] %>
+      <% when 2 %>
+        number 2!
+        <%= f.input array[index], collection: (1..5) %>
+      <% end %>
     </div>
   <% end %>
   <div class="actions">

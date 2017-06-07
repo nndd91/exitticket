@@ -1,5 +1,5 @@
 class FormsController < ApplicationController
-  before_action :setup_form, only: [:show, :attempt, :attemmping]
+  before_action :setup_form, only: [:show, :attempt, :attempting]
 
   def new
   end
