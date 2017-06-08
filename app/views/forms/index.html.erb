@@ -15,7 +15,9 @@
     <th>Title and Description</th>
     <th>Author</th>
     <th>Date</th>
-    <th>Template Title</th>
+    <% if current_user.is_admin %>
+      <th>Template Title</th>
+    <% end %>
     <th>Status</th>
     <th>Link</th>
   </tr>
@@ -36,9 +38,11 @@
       <td>
         <%= form.form_date %>
       </td>
-      <td>
-        <%= form.form_template.title %>
-      </td>
+      <% if current_user.is_admin %>
+        <td>
+          <%= form.form_template.title %>
+        </td>
+      <% end %>
       <!-- Check log model -->
       <% if form.logs.exists?(user: current_user) %>
         <td>

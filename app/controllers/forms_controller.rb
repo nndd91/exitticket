@@ -1,7 +1,9 @@
 class FormsController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :authenticate_admin, except: [:index, :attempt, :attempting]
   before_action :setup_form, only: [:show, :attempt, :attempting, :status, :results]
   before_action :setup_questions, only: [:show, :results]
-  before_action :authenticate_user!
 
   def new
     @form = current_user.forms.build
@@ -80,5 +82,12 @@ class FormsController < ApplicationController
 
   def form_params
     params.require(:form).permit(:form_template, :form_date, :title, :description)
+  end
+
+  def authenticate_admin
+    if !current_user.is_admin
+      flash[:notice] = "Only admin can view this page!"
+      redirect_to root_path
+    end
   end
 end
