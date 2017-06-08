@@ -1,17 +1,7 @@
 Rails.application.routes.draw do
-  get 'formtemplates/index'
 
-  get 'formtemplates/show'
-
-  get 'formtemplates/new'
-
-  get 'formtemplates/create'
-
-  get 'formtemplates/edit'
-
-  get 'formtemplates/update'
-
-  get 'formtemplates/destroy'
+  resources :form_templates do
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
