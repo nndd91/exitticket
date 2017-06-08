@@ -6,21 +6,25 @@
   <div class="panel-body" style="padding: 30px">
 
     <%= simple_form_for @form, url: attempting_form_path, method: :post do |f| %>
-
+      <% @answers_array = [] %>
       <% @form.questions.each_with_index do |question, index| %>
-        <% params_symbol = ('q'+(index+1).to_s).to_sym %>
+        <% @answers_symbol = ('answer#'+ index.to_s).to_sym %>
         <div class="form-inputs" style="padding: 30px 0">
         <h4><%= question.label %></h4>
           <% case question.qns_type %>
           <% when 1 %>
-            <%= f.input params_symbol %>
+            <%= f.input @answers_symbol %>
           <% when 2 %>
-            <%= f.input params_symbol, collection: (1..5) %>
+            <%= f.input @answers_symbol, collection: (1..5) %>
           <% when 3 %>
-            <%= f.input params_symbol, as: :text %>
+            <%= f.input @answers_symbol, as: :text %>
           <% end %>
+        <% @answers_array.push(params[@answers_symbol]) %>
         </div>
       <% end %>
+      <!-- '|' instead of ',' as some answers may contain ',' -->
+      <% f.hidden_field :answers_array, @answers_array.join('|') %>
+
       <div class="actions">
         <%= f.button :submit %>
       </div>

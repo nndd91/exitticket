@@ -37,10 +37,9 @@ class FormsController < ApplicationController
 
   def attempting
     #array = [:q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10]
-
+    @answers_array = params[:form][:answers_array].split('|')
     @form.questions.each_with_index do |question, index|
-      params_symbol = ('q'+(index+1).to_s).to_sym
-      @answer = question.answers.build(content: params[:form][params_symbol], form: @form)
+      @answer = question.answers.build(content: @answers_array[index], form: @form)
       @answer.user = current_user
       @answer.save
     end

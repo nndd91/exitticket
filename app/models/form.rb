@@ -5,4 +5,6 @@ class Form < ApplicationRecord
   has_many :answers
 
   attr_accessor :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10
+  attr_accessor :answers_array
+
 end
