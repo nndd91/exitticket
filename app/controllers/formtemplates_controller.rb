@@ -30,9 +30,13 @@ class FormtemplatesController < ApplicationController
   end
 
   def update
+    @formtemplate.update(formtemplate_params)
+    @formtemplate.save
   end
 
   def destroy
+    @formtemplate.destroy
+    redirect_to formtemplates_path
   end
 
   private

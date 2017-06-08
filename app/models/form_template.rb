@@ -1,5 +1,6 @@
 class FormTemplate < ApplicationRecord
   belongs_to :user
-  has_many :questions
-  has_many :forms
+  has_many :forms, dependent: :destroy
+  has_many :questions, dependent: :destroy
+
 end

@@ -14,6 +14,9 @@
     <th>
       Author
     </th>
+    <th>
+      Actions
+    </th>
   </tr>
   <% @formtemplates.each do |formtemplate| %>
     <tr>
@@ -28,6 +31,10 @@
       </td>
       <td>
         <%= formtemplate.user.first_name %>
+      </td>
+      <td>
+        <%= link_to 'Edit', edit_formtemplate_path(formtemplate) %>
+        <%= link_to 'Delete', formtemplate_path(formtemplate), method: :delete %>
       </td>
     </tr>
   <% end %>
