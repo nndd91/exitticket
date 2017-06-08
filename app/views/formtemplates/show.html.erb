@@ -1,2 +1,36 @@
-<h1>Formtemplates#show</h1>
-<p>Find me in app/views/formtemplates/show.html.erb</p>
+<h1>Formtemplates</h1>
+
+<div class="panel panel-default">
+  <table class="table">
+    <tr>
+      <td>Title</td>
+      <td><%= @formtemplate.title %></td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><%= @formtemplate.description %></td>
+    </tr>
+    <tr>
+      <td>Author</td>
+      <td><%= @formtemplate.user.first_name %></td>
+    </tr>
+
+  </table>
+</div>
+
+
+<% @questions.each do |question| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <table>
+        <tr>
+          <td span="2">Title: <%= question.label %></td>
+        </tr>
+        <tr>
+          <td>Question Type: <%= question.qns_type %></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>

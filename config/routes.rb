@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :form_templates do
+  resources :formtemplates do
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class="alert alert-warning" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <h1>Forms index</h1>
 <%= link_to 'New Form', new_form_path %>
 

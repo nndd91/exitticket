@@ -1,2 +1,34 @@
-<h1>Formtemplates#index</h1>
-<p>Find me in app/views/formtemplates/index.html.erb</p>
+<h1>Formtemplates List</h1>
+<%= link_to "New Form Template", new_formtemplate_path %>
+<table class="table">
+  <tr>
+    <th>
+      Form Template ID
+    </th>
+    <th>
+      Template Title
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+      Author
+    </th>
+  </tr>
+  <% @formtemplates.each do |formtemplate| %>
+    <tr>
+      <td>
+        <%= formtemplate.id %>
+      </td>
+      <td>
+        <%= link_to formtemplate.title, formtemplate_path(formtemplate) %>
+      </td>
+      <td>
+        <%= formtemplate.description %>
+      </td>
+      <td>
+        <%= formtemplate.user.first_name %>
+      </td>
+    </tr>
+  <% end %>
+</table>
