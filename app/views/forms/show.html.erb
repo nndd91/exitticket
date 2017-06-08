@@ -1,35 +1,19 @@
 
 
 <% if current_user == @form.user || current_user.is_admin == true %>
-    <h1>Results for: </h1>
-    <h2><%= @form.title %></h2>
-
-    <% @questions.each do |question| %>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <table>
-            <tr>
-              <td span="2">Title: <%= question.label %></td>
-            </tr>
-            <tr>
-              <td>Question Type: <%= question.qns_type %></td>
-              <td></td>
-            </tr>
-          </table>
-        </div>
-        <div class="panel-body">
-          <table class="table-bordered">
-            <% question.answers.each do |answer| %>
-              <tr>
-                <td style="padding: 5px"><%= answer.user.first_name %></td>
-                <td style="padding: 5px"><%= answer.content %></td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
-      </div>
-    <% end %>
-
+<nav class="nav navbar-default">
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to 'Results' %>
+    </li>
+    <li>
+      <%= link_to 'Status', status_form_path(@form), remote: true %>
+    </li>
+  </ul>
+</nav>
+  <div id="show_content">
+    <%= render partial: 'forms/results' %>
+  </div>
 
 <% else %>
 You are not allowed!

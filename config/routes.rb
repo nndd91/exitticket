@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       get 'attempt'
       post 'attempting'
+      get 'status'
     end
   end
 end

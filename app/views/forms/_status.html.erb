@@ -1,0 +1,46 @@
+<h1>Status for:</h1>
+<h2><%= @form.title %></h2>
+<br />
+<h2>Users that have attempted the form</h2>
+<div class="panel panel-default">
+  <table class="table">
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Date Attempted
+      </th>
+    </tr>
+    <% @logs.each do |log| %>
+      <% @user = log.user %>
+      <tr>
+        <td>
+          <%= @user.first_name %>
+        </td>
+        <td>
+          <%= log.created_at %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<h2>Yet to attempt..</h2>
+<div class="panel panel-default">
+  <table class="table">
+    <tr>
+      <th>
+        Name
+      </th>
+    </tr>
+    <% @users.each do |user| %>
+      <% if !@logs.exists?(user.id) %>
+        <tr>
+          <td>
+            <%= user.first_name %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
