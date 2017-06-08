@@ -2,7 +2,7 @@ class FormsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :authenticate_admin, except: [:index, :attempt, :attempting]
-  before_action :setup_form, only: [:show, :attempt, :attempting, :status, :results]
+  before_action :setup_form, only: [:show, :attempt, :attempting, :status, :results, :destroy, :edit]
   before_action :setup_questions, only: [:show, :results]
 
   def new
@@ -24,6 +24,8 @@ class FormsController < ApplicationController
   end
 
   def destroy
+    @form.destroy
+    redirect_to forms_path
   end
 
   def update
