@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :form_templates
   has_many :forms
   has_many :answers
+  has_many :logs
 end
 
