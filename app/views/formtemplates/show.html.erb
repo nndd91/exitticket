@@ -18,8 +18,12 @@
   </table>
 </div>
 
-<%= link_to 'Edit FormTemplate or Add Questions', edit_formtemplate_path(@formtemplate) %>
-<%= link_to 'Create Form with Template', new_form_path(form_template: @formtemplate) %>
+<div>
+  <%= link_to 'Edit FormTemplate or Add Questions', edit_formtemplate_path(@formtemplate), class: "btn btn-primary" %>
+  <%= link_to 'Create Form with Template', new_form_path(form_template: @formtemplate), class: "btn btn-primary" %>
+</div>
+<br />
+
 <% @questions.each do |question| %>
   <div class="panel panel-default">
     <div class="panel-heading">

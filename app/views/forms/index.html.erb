@@ -5,7 +5,10 @@
 <% end %>
 
 <h1>Forms index</h1>
-<%= link_to 'New Form', new_form_path %>
+
+<div style="padding: 0 0 30px 0; display: flex; justify-content: flex-end">
+  <%= link_to 'New Form', new_form_path, class: "btn btn-primary"%>
+</div>
 
 <table class="table">
   <tr>
@@ -15,8 +18,8 @@
     <th>Template Title</th>
     <th>Status</th>
     <th>Link</th>
-
   </tr>
+
   <% @forms.each do |form| %>
     <tr>
       <td>
@@ -36,8 +39,7 @@
       <td>
         <%= form.form_template.title %>
       </td>
-
-        <!-- Check log model -->
+      <!-- Check log model -->
       <% if form.logs.exists?(user: current_user) %>
         <td>
           <span class="glyphicon glyphicon-ok"></span>
@@ -55,7 +57,6 @@
         </td>
       <% end %>
       </td>
-
     <tr>
   <% end %>
 </table>

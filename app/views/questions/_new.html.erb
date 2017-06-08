@@ -2,7 +2,7 @@
 <% @question = formtemplate.questions.build %>
 <%= simple_form_for @question, url: formtemplate_questions_path(formtemplate.id), remote: true do |f| %>
   <%= f.input :label %>
-  <%= f.input :qns_type, collection: 1..3 %>
+  <%= f.input :qns_type, collection: ["Text Field", "1 to 5 Collection", "Text Area"] %>
   <%= f.button :submit %>
 <% end %>
 

@@ -11,7 +11,7 @@
         <% params_symbol = ('q'+(index+1).to_s).to_sym %>
         <div class="form-inputs" style="padding: 30px 0">
         <h4><%= question.label %></h4>
-          <% case question.qns_type %>
+          <% case question.qns_type_before_type_cast %>
           <% when 1 %>
             <%= f.input params_symbol %>
           <% when 2 %>
@@ -19,6 +19,7 @@
           <% when 3 %>
             <%= f.input params_symbol, as: :text %>
           <% end %>
+          <% byebug %>
         </div>
       <% end %>
       <div class="actions">
