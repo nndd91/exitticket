@@ -45,6 +45,9 @@ class FormsController < ApplicationController
       @answer.save
     end
 
+    @log = @form.logs.build(user: current_user)
+    @log.save
+
     redirect_to forms_path
   end
 

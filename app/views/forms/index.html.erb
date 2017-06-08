@@ -7,8 +7,8 @@
     <th>Author</th>
     <th>Date</th>
     <th>Template Title</th>
-    <th>Last Attempt On</th>
-    <th>Attempt</th>
+    <th>Status</th>
+    <th>Link</th>
 
   </tr>
   <% @forms.each do |form| %>
@@ -30,13 +30,26 @@
       <td>
         <%= form.form_template.title %>
       </td>
-      <td>
+
         <!-- Check log model -->
+      <% if form.logs.exists?(user: current_user) %>
+        <td>
+          <span class="glyphicon glyphicon-ok"></span>
+        </td>
+        <td>
+          Done
+        </td>
+      <% else %>
+        <td>
+          <span class="glyphicon glyphicon-remove"></span>
+        </td>
+        <td>
+          <!-- Click to attempt or already Done -->
+          <%= link_to 'Attempt Now', attempt_form_path(form) %>
+        </td>
+      <% end %>
       </td>
-      <td>
-        <!-- Click to attempt or already Done -->
-        <%= link_to 'Attempt Now', attempt_form_path(form) %>
-      </td>
+
     <tr>
   <% end %>
 </table>
