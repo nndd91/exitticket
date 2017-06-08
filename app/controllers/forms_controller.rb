@@ -31,7 +31,7 @@ class FormsController < ApplicationController
   end
 
   def index
-    @forms = Form.all
+    @forms = Form.all.order('created_at DESC')
   end
 
   def attempt

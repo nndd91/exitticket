@@ -19,7 +19,7 @@
 </div>
 
 <%= link_to 'Edit FormTemplate or Add Questions', edit_formtemplate_path(@formtemplate) %>
-
+<%= link_to 'Create Form with Template', new_form_path(form_template: @formtemplate) %>
 <% @questions.each do |question| %>
   <div class="panel panel-default">
     <div class="panel-heading">
