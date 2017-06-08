@@ -1,3 +1,9 @@
 <h1>Formtemplates#edit</h1>
 
 <%= render 'form' %>
+<div id="newquestion">
+  <%= render partial: 'questions/new', locals: { formtemplate: @formtemplate } %>
+</div>
+<div id="questionlist">
+  <%= render partial: 'questions/list', locals: { questions: @formtemplate.questions } %>
+</div>

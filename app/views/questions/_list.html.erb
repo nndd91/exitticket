@@ -1,0 +1,16 @@
+<h2>Question List</h2>
+<% questions.each do |question| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <table>
+        <tr>
+          <td span="2">Title: <%= question.label %></td>
+        </tr>
+        <tr>
+          <td>Question Type: <%= question.qns_type %></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% end %>
