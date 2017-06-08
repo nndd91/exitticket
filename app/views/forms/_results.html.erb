@@ -16,7 +16,7 @@
         </div>
         <div class="panel-body">
           <table class="table-bordered">
-            <% question.answers.each do |answer| %>
+            <% question.answers.where(form: @form).each do |answer| %>
               <tr>
                 <td style="padding: 5px"><%= answer.user.first_name %></td>
                 <td style="padding: 5px"><%= answer.content %></td>
