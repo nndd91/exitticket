@@ -2,7 +2,7 @@ class FormsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :authenticate_admin, except: [:index, :attempt, :attempting]
-  before_action :setup_form, only: [:show, :attempt, :attempting, :status, :results, :destroy, :edit]
+  before_action :setup_form, only: [:show, :attempt, :attempting, :status, :results, :destroy, :edit, :update]
   before_action :setup_questions, only: [:show, :results]
 
   def new
@@ -27,9 +27,15 @@ class FormsController < ApplicationController
   end
 
   def update
+    @form.update(form_params)
+    @form.save
+    redirect_to form_path(@form)
   end
 
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def index
@@ -64,8 +70,10 @@ class FormsController < ApplicationController
   end
 
   def results
+    respond_to do |format|
+      format.js
+    end
   end
-
 
   private
 

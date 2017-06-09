@@ -1,0 +1,16 @@
+<nav class="nav navbar-default">
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to  "Current Form ID: #{@form.id}", results_form_path(@form), remote: true %>
+    </li>
+    <li>
+      <%= link_to 'Edit', edit_form_path(@form), remote: true %>
+    </li>
+    <li>
+      <%= link_to 'Status', status_form_path(@form), remote: true %>
+    </li>
+    <li>
+      <%= link_to 'Back to all Forms', forms_path %>
+    </li>
+  </ul>
+</nav>

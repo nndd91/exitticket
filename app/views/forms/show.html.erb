@@ -1,19 +1,10 @@
 
 
 <% if current_user == @form.user || current_user.is_admin == true %>
-<nav class="nav navbar-default">
-  <ul class="nav navbar-nav">
-    <li>
-      <%= link_to 'Results' %>
-    </li>
-    <li>
-      <%= link_to 'Status', status_form_path(@form), remote: true %>
-    </li>
-  </ul>
-</nav>
-  <div id="show_content">
-    <%= render partial: 'forms/results' %>
-  </div>
+<%= render 'forms/nav' %>
+<div id="show_content">
+  <%= render partial: 'forms/results' %>
+</div>
 
 <% else %>
 You are not allowed!

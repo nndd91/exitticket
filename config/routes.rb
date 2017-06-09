@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'attempt'
       post 'attempting'
       get 'status'
+      get 'results'
     end
   end
 end
