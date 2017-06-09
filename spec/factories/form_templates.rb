@@ -2,6 +2,10 @@ FactoryGirl.define do
   factory :form_template do
     title "MyString"
     description "MyString"
-    user nil
+    association :user
+
+    trait :invalid do
+      title nil
+    end
   end
 end
