@@ -54,11 +54,17 @@ RSpec.describe QuestionsController, type: :controller do
         post :create, xhr: true, params: { formtemplate_id: form_template.id, question: params }
       end
 
-      let(:params) { attributes_for(:question) }
-      it { expect(response).to render_template(:create) }
-      it { expect(Question.count).to eq(2) }
-      it { expect(assigns(:formtemplate)).to eq(form_template) }
-      it { expect(assigns(:question)).to be_valid }
+      context 'save success' do
+        let(:params) { attributes_for(:question) }
+        it { expect(response).to render_template(:create) }
+        it { expect(Question.count).to eq(2) }
+        it { expect(assigns(:formtemplate)).to eq(form_template) }
+        it { expect(assigns(:question)).to be_valid }
+      end
+
+      context 'save fails' do
+
+      end
 
     end
 

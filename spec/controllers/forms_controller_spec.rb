@@ -35,16 +35,24 @@ RSpec.describe FormsController, type: :controller do
         it { expect(response).to have_http_status(:success) }
     end
 
-    describe "GET #create" do
+    describe "post #create" do
       let(:form_template) { create(:form_template, user: admin) }
 
       before do
         post :create, params: { form: params }
       end
 
-      let(:params) { attributes_for(:form, form_template: form_template, user: admin ) }
-      it { expect(Form.count).to eq(1) }
-      it { expect(response).to redirect_to form_path(Form.last)}
+      context 'save successful' do
+        let(:params) { attributes_for(:form, form_template_id: form_template.id) }
+        it { expect(Form.count).to eq(1) }
+        it { expect(response).to redirect_to form_path(Form.last)}
+      end
+
+      context 'save failure' do
+        let(:params) { attributes_for(:form, :invalid) }
+        it { expect(Form.count).to eq(0) }
+        it { expect(response).to render_template(:new) }
+      end
     end
 
     describe "GET #destroy" do
@@ -59,16 +67,15 @@ RSpec.describe FormsController, type: :controller do
       it { expect(response).to redirect_to forms_path }
     end
 
-    describe "GET #update" do
+    describe "post #update" do
       let(:form_template) { create(:form_template, user: admin) }
       let!(:forms) { create_list(:form, 3, form_template: form_template, user: admin) }
 
       before do
-        post :update, params: {}
+        post :update, params: { form: params, id: forms[0].id }
       end
-
-      it { expect(response).to have_http_status(:success) }
-      it { expect(assigns(:form)).to eq(forms[0])}
+      let(:params) { attributes_for(:form, title: "New Title!")}
+      it { expect(assigns(:form).title).to eq("New Title!")}
     end
 
     describe "GET #edit" do
@@ -76,10 +83,10 @@ RSpec.describe FormsController, type: :controller do
       let!(:forms) { create_list(:form, 3, form_template: form_template, user: admin) }
 
       before do
-        get :edit, params: { id: forms[0] }
+        get :edit, xhr: true, params: { id: forms[0] }
       end
 
-      it { expect(response).to have_http_status(:success) }
+      it { expect(response).to render_template(:edit) }
       it { expect(assigns(:form)).to eq(forms[0]) }
     end
 
