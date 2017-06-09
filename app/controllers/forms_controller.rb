@@ -55,10 +55,14 @@ class FormsController < ApplicationController
       @answer.save
     end
 
-    @log = @form.logs.build(user: current_user)
-    @log.save
+    if @form.save
+      @log = @form.logs.build(user: current_user)
+      @log.save
 
-    redirect_to forms_path
+      redirect_to forms_path
+    else
+      render :attempt
+    end
   end
 
   def status
