@@ -20,11 +20,13 @@
         <h4><%= question.label %></h4>
           <% case question.qns_type_before_type_cast %>
           <% when 1 %>
-            <%= f.input params_symbol, required: true %>
+            <%= f.input params_symbol, required: true,
+              input_html: { value: (params[:values_cache].nil? ? "" : params[:values_cache][index]) } %>
           <% when 2 %>
-            <%= f.input params_symbol, collection: (1..5) %>
+            <%= f.input params_symbol, collection: (1..5), include_blank: "(Select one)", selected: (params[:values_cache].nil? ? nil : params[:values_cache][index]) %>
           <% when 3 %>
-            <%= f.input params_symbol, as: :text %>
+            <%= f.input params_symbol, as: :text, required: true,
+              input_html: { value: (params[:values_cache].nil? ? "" : params[:values_cache][index]) } %>
           <% end %>
         </div>
       <% end %>

@@ -90,6 +90,14 @@ RSpec.describe FormsController, type: :controller do
       it { expect(assigns(:form)).to eq(forms[0]) }
     end
 
+    describe 'get status' do
+      #Implementing soon...
+    end
+
+    describe 'get results' do
+      #Implementing soon...
+    end
+
   end
 
   context 'user signed in' do
@@ -120,6 +128,16 @@ RSpec.describe FormsController, type: :controller do
       end
       it { expect(response).to have_http_status(:success) }
       it { expect(assigns(:form)).to eq(forms[0]) }
+    end
+
+
+
+    describe 'attempting' do
+      before do
+        post :attempting
+      end
+
+      #Need code here to test!
     end
   end
 end
