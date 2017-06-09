@@ -13,9 +13,7 @@ class FormsController < ApplicationController
   end
 
   def create
-    params[:form][:form_template] = FormTemplate.find(params[:form][:form_template])
     @form = current_user.forms.build(form_params)
-    @form.form_template = params[:form][:form_template]
     if @form.save
       redirect_to form_path(@form)
     else
@@ -83,7 +81,7 @@ class FormsController < ApplicationController
   end
 
   def form_params
-    params.require(:form).permit(:form_template, :form_date, :title, :description)
+    params.require(:form).permit(:form_template_id, :form_date, :title, :description)
   end
 
   def authenticate_admin

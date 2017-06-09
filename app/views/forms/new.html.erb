@@ -4,7 +4,7 @@
   <% if params[:form_template].nil? %>
     <%= f.association :form_template, collection: FormTemplate.all %>
   <% else %>
-    <%= f.input :form_template, collection: FormTemplate.all, selected: params[:form_template] %>
+    <%= f.association :form_template, collection: FormTemplate.all, selected: params[:form_template] %>
   <% end %>
   <%= f.input :form_date, as: :date %>
   <%= f.input :title %>
