@@ -47,20 +47,28 @@ class FormsController < ApplicationController
 
   def attempting
     #array = [:q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10]
-
+    save_success = true
     @form.questions.each_with_index do |question, index|
       params_symbol = ('q'+(index+1).to_s).to_sym
       @answer = question.answers.build(content: params[:form][params_symbol], form: @form)
       @answer.user = current_user
-      @answer.save
+      if !@answer.save
+        flash[:notice] = "Please fill in required fields!"
+        save_success = false
+        break
+      end
     end
 
-    if @form.save
+    if save_success
       @log = @form.logs.build(user: current_user)
       @log.save
 
       redirect_to forms_path
     else
+      @answers = Answer.where(form: @form, question: @form.questions, user: current_user)
+      @answers.each do |answer|
+        answer.destroy
+      end
       render :attempt
     end
   end

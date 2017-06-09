@@ -3,6 +3,13 @@
   <div class="panel-heading">
     <h1><%= @form.title %></h1>
   </div>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-warning" role="alert">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
   <div class="panel-body" style="padding: 30px">
 
     <%= simple_form_for @form, url: attempting_form_path, method: :post do |f| %>
