@@ -1,0 +1,2 @@
+$('#newquestion').html("<%= j render partial: 'questions/new', locals: { formtemplate: @formtemplate } %>")
+$('#questionlist').html("<%= j render partial: 'questions/list', locals: { questions: @formtemplate.questions } %>")

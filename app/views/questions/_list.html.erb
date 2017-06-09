@@ -9,7 +9,10 @@
           </tr>
           <tr>
             <td>Question Type: <%= question.qns_type %></td>
-            <td></td>
+            <td>
+            <%= link_to 'Edit', edit_formtemplate_question_path(formtemplate_id: question.form_template, id: question) %>
+            <%= link_to 'Delete', formtemplate_question_path(formtemplate_id: question.form_template, id: question), method: :delete, remote: true %>
+            </td>
           </tr>
         </table>
       </div>

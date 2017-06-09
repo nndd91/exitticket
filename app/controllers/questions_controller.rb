@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: [:edit, :destroy, :update]
+
   def list
     @formtemplate = FormTemplate.find(params[:id])
     @questions = @formtemplate.questions
@@ -25,9 +27,18 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @formtemplate = FormTemplate.find(params[:formtemplate_id])
+    @question.destroy
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
+
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
   def question_params
     params.require(:question).permit(:label, :qns_type)
