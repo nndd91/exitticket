@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :formtemplates do
-    resources :questions
+    resources :questions, except: [:index, :new]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

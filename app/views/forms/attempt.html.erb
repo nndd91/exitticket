@@ -20,7 +20,7 @@
         <h4><%= question.label %></h4>
           <% case question.qns_type_before_type_cast %>
           <% when 1 %>
-            <%= f.input params_symbol %>
+            <%= f.input params_symbol, required: true %>
           <% when 2 %>
             <%= f.input params_symbol, collection: (1..5) %>
           <% when 3 %>

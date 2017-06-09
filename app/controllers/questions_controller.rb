@@ -1,13 +1,7 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_admin
   before_action :set_question, only: [:edit, :destroy, :update]
-
-  def list
-    @formtemplate = FormTemplate.find(params[:id])
-    @questions = @formtemplate.questions
-  end
-
-  def show
-  end
 
   def edit
   end
@@ -16,7 +10,7 @@ class QuestionsController < ApplicationController
     @formtemplate = FormTemplate.find(params[:formtemplate_id])
     @question.update(question_params)
     @question.save
-    redirect_to formtemplate_path(formtemplate: @formtemplate)
+    redirect_to formtemplate_path(id: @formtemplate)
   end
 
   def create
@@ -46,5 +40,12 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:label, :qns_type)
+  end
+
+  def authenticate_admin
+    if !current_user.is_admin
+      flash[:notice] = "Only admin can view this page!"
+      redirect_to root_path
+    end
   end
 end

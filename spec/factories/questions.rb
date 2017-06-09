@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :question do
     form_template nil
-    type 1
+    qns_type "Text Field"
     label "MyString"
     options "MyString"
   end
