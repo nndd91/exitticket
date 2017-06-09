@@ -1,2 +1,9 @@
-<h1>Questions#edit</h1>
-<p>Find me in app/views/questions/edit.html.erb</p>
+<h1>Question Edit</h1>
+<%= simple_form_for @question,
+  url: formtemplate_question_path(formtemplate_id: params[:formtemplate_id],
+                                  id: @question.id) do |f| %>
+  <%= f.input :label %>
+  <%= f.input :qns_type, collection: ["Text Field", "1 to 5 Collection", "Text Area"] %>
+  <%= f.button :submit %>
+<% end %>
+

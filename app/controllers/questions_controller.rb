@@ -13,6 +13,10 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @formtemplate = FormTemplate.find(params[:formtemplate_id])
+    @question.update(question_params)
+    @question.save
+    redirect_to formtemplate_path(formtemplate: @formtemplate)
   end
 
   def create
