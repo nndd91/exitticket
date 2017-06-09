@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :log do
-    form nil
-    user nil
+    association :form
+    association :user
   end
 end
