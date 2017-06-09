@@ -18,6 +18,7 @@
     <th>Date</th>
     <% if current_user.is_admin %>
       <th>Template Title</th>
+      <th>Attempts</th>
     <% end %>
     <th>Status</th>
     <th>Link</th>
@@ -42,6 +43,13 @@
       <% if current_user.is_admin %>
         <td>
           <%= form.form_template.title %>
+        </td>
+        <td>
+          <% if form.questions.present? %>
+            <%= form.questions.first.answers.where(form: form).count %> / <%= User.count - 1 %>
+          <% else %>
+            No Questions to do!
+          <%  end %>
         </td>
       <% end %>
       <!-- Check log model -->

@@ -6,4 +6,5 @@ class Answer < ApplicationRecord
   validates :question, presence: true
   validates :form, presence: true
   validates :user, presence: true
+  validates :content, presence: true
 end
