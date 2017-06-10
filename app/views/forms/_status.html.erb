@@ -43,7 +43,7 @@
       </th>
     </tr>
     <% @users.each do |user| %>
-      <% if !@logs.exists?(user.id) %>
+      <% if !@logs.exists?(user: user.id) %>
         <tr>
           <td>
             <%= user.username %>
