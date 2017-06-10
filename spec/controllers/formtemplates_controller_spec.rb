@@ -87,7 +87,6 @@ RSpec.describe FormtemplatesController, type: :controller do
 
       let(:params) { attributes_for(:form_template, title: "New Title!") }
       it { expect(assigns(:formtemplate)).to eq(formtemplate) }
-      it { expect(response).to have_http_status(:success) }
       it { expect(assigns(:formtemplate).title).to eq("New Title!") }
     end
 

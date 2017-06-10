@@ -5,7 +5,7 @@ class FormtemplatesController < ApplicationController
   before_action :set_formtemplate, only: [:show, :edit, :update, :destroy]
 
   def index
-    @formtemplates = FormTemplate.all
+    @formtemplates = FormTemplate.all.order(:id)
   end
 
   def show
