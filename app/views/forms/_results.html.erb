@@ -6,35 +6,49 @@
       <div class="row">
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-2">
-              Label:
+            <div class="col-md-1">
+              <h4><b>Q. <%= question.qns_no %></b></h4>
             </div>
             <div class="col-md-8">
-              <%= question.label %>
+              <b><%= question.label %></b>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-1">
               Type:
             </div>
             <div class="col-md-3">
               <%= question.qns_type %>
             </div>
             <div class="col-md-2">
-              Required?
+              Required:
             </div>
-            <div class="col-md-3">
-              <%= question.qns_type %>
+            <div class="col-md-2">
+              <%= question.required %>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="panel-body">
-      <table class="table-bordered">
-        <% question.answers.where(form: @form).each do |answer| %>
+      <table class="table table-bordered">
+        <tr>
+          <th class="col-xs-1">
+            Index
+          </th>
+          <th class="col-xs-3 col-md-2">
+            User
+          </th>
+          <th>
+            Content
+          </th>
+        </tr>
+        <% question.answers.where(form: @form).each_with_index do |answer, index| %>
           <tr>
-            <td style="padding: 5px"><%= answer.user.first_name %></td>
+            <td style="padding: 5px"><%= index+1 %></td>
+            <td style="padding: 5px"><%= answer.user.username %></td>
             <td style="padding: 5px"><%= answer.content %></td>
           </tr>
         <% end %>

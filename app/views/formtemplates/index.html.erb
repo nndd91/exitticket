@@ -36,7 +36,7 @@
       </td>
       <td>
         <%= link_to 'Edit', edit_formtemplate_path(formtemplate) %>
-        <%= link_to 'Delete', formtemplate_path(formtemplate), method: :delete %>
+        <%= link_to 'Delete', formtemplate_path(formtemplate), method: :delete, data: {confirm: "Are you sure? This will delete all Forms, Questions, and Answers linked to this template. Linked Resources: Forms: #{formtemplate.forms.count}, Questions: #{formtemplate.questions.count}".html_safe}  %>
       </td>
     </tr>
   <% end %>

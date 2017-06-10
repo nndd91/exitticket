@@ -20,7 +20,7 @@ class FormtemplatesController < ApplicationController
     @formtemplate = FormTemplate.new(formtemplate_params)
     @formtemplate.user = current_user
     if @formtemplate.save
-      redirect_to formtemplate_path(@formtemplate)
+      redirect_to edit_formtemplate_path(@formtemplate)
     else
       render :new
     end

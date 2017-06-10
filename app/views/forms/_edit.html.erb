@@ -11,4 +11,6 @@
   <%= f.input :description, as: :text %>
   <%= f.button :submit %>
 <% end %>
-
+<div style="display: flex; justify-content: flex-end;">
+<%= link_to 'Delete this form', form_path(@form), method: :delete, data: { confirm: "Are you sure you want to delete this form?" }, class: "btn btn-danger"%>
+</div>

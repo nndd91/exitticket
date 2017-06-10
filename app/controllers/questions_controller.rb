@@ -8,8 +8,20 @@ class QuestionsController < ApplicationController
 
   def move_up
     @formtemplate = FormTemplate.find(params[:formtemplate_id])
-    @question.qns_no -= 1
-    @question.save
+
+    if @question.qns_no > 1
+      final_number = @question.qns_no - 1
+
+      # Update question no of the one before
+      @prev_question = @formtemplate.questions.find_by(qns_no: final_number)
+      @prev_question.qns_no += 1
+      @prev_question.save
+
+      # Update question number
+      @question.qns_no -= 1
+      @question.save
+    end
+
     respond_to do |format|
       format.js
     end
@@ -17,8 +29,19 @@ class QuestionsController < ApplicationController
 
   def move_down
     @formtemplate = FormTemplate.find(params[:formtemplate_id])
-    @question.qns_no += 1
-    @question.save
+
+    if @question.qns_no < @formtemplate.questions.order('qns_no ASC').last.qns_no
+      final_number = @question.qns_no + 1
+
+      # Update question no of the one after
+      @next_question = @formtemplate.questions.find_by(qns_no: final_number)
+      @next_question.qns_no -= 1
+      @next_question.save
+
+      # Update own question no.
+      @question.qns_no += 1
+      @question.save
+    end
     respond_to do |format|
       format.js
     end
@@ -34,6 +57,14 @@ class QuestionsController < ApplicationController
   def create
     @formtemplate = FormTemplate.find(params[:formtemplate_id])
     @question = @formtemplate.questions.build(question_params)
+
+    if @formtemplate.questions.count > 0
+      last_question_no = @formtemplate.questions.order("qns_no ASC").last.qns_no
+      @question.qns_no = last_question_no + 1
+    else
+      @question.qns_no = 1
+    end
+
     if @question.save
       respond_to do |format|
         format.js

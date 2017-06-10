@@ -9,6 +9,12 @@
   <% if flash[:notice] %>
     <div class="alert alert-warning" role="alert">
       <%= flash[:notice] %>
+      <% if !params[:invalid_fields].nil? %>
+        Required:
+        <% params[:invalid_fields].each do |qns_id| %>
+           Q<%= Question.find(qns_id).qns_no %>,
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 
@@ -19,15 +25,17 @@
       <% @form.questions.order('qns_no ASC').each_with_index do |question, index| %>
         <% params_symbol = ('q'+(index+1).to_s).to_sym %>
         <div class="form-inputs" style="padding: 30px 0">
-        <h4><%= question.label %></h4>
+          <h4>
+            <%= question.label %>
+          </h4>
           <% case question.qns_type_before_type_cast %>
           <% when 1 %>
-            <%= f.input params_symbol, required: true,
+            <%= f.input params_symbol, required: question.required ? true : false,
               input_html: { value: (params[:values_cache].nil? ? "" : params[:values_cache][index]) } %>
           <% when 2 %>
-            <%= f.input params_symbol, collection: (1..5), include_blank: "(Select one)", selected: (params[:values_cache].nil? ? nil : params[:values_cache][index]) %>
+            <%= f.input params_symbol, collection: (1..5), include_blank: "(Select one)", selected: (params[:values_cache].nil? ? nil : params[:values_cache][index]), required: question.required ? true : false %>
           <% when 3 %>
-            <%= f.input params_symbol, as: :text, required: true,
+            <%= f.input params_symbol, as: :text, required: question.required ? true : false,
               input_html: { value: (params[:values_cache].nil? ? "" : params[:values_cache][index]) } %>
           <% end %>
         </div>
