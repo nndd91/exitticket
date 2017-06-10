@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   resources :formtemplates do
-    resources :questions, except: [:index, :new]
+    resources :questions, except: [:index, :new] do
+      member do
+        get 'move_up'
+        get 'move_down'
+      end
+    end
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

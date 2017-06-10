@@ -16,7 +16,7 @@
 
     <%= simple_form_for @form, url: attempting_form_path, method: :post do |f| %>
 
-      <% @form.questions.each_with_index do |question, index| %>
+      <% @form.questions.order('qns_no ASC').each_with_index do |question, index| %>
         <% params_symbol = ('q'+(index+1).to_s).to_sym %>
         <div class="form-inputs" style="padding: 30px 0">
         <h4><%= question.label %></h4>

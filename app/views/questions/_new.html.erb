@@ -2,7 +2,8 @@
 <% @question = formtemplate.questions.build %>
 <%= simple_form_for @question, url: formtemplate_questions_path(formtemplate.id), remote: true do |f| %>
   <%= f.input :label %>
-  <%= f.input :qns_type, collection: ["Text Field", "1 to 5 Collection", "Text Area"] %>
+  <%= f.input :qns_type, collection: ["Text Field", "1 to 5 Collection", "Text Area"], selected: "Text Field" %>
+  <%= f.input :required, collection: [["True", true], ["False", false]] %>
   <%= f.button :submit %>
 <% end %>
 

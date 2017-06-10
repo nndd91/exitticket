@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608075706) do
+ActiveRecord::Schema.define(version: 20170610103553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170608075706) do
     t.string "options"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "required", default: true, null: false
+    t.integer "qns_no", default: 0, null: false
     t.index ["form_template_id"], name: "index_questions_on_form_template_id"
   end
 

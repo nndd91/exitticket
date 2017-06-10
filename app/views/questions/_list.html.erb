@@ -1,12 +1,17 @@
 <h2>Question List</h2>
-<% questions.each do |question| %>
+<% questions.order('qns_no ASC').each do |question| %>
   <% if !question.label.nil? %>
     <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="col-md-8">
+      <div class="panel-body" style="display: flex; align-items: center;">
+
+        <div class="col-md-1" style="display: flex; flex-direction: column; align-items: center; ">
+          <%= link_to '<span class="glyphicon glyphicon-chevron-up btn btn-default" aria-hidden="true"></span>'.html_safe, move_up_formtemplate_question_path(formtemplate_id: question.form_template, id: question), remote: true %><br />
+          <%= link_to '<span class="glyphicon glyphicon-chevron-down btn btn-default" aria-hidden="true"></span>'.html_safe, move_down_formtemplate_question_path(formtemplate_id: question.form_template, id: question), remote: true %>
+        </div>
+        <div class="col-md-9">
           <div class="row">
             <div class="col-md-2">
-              Label:
+              No. <%= question.qns_no %>
             </div>
             <div class="col-md-8">
               <%= question.label %>
@@ -20,10 +25,10 @@
               <%= question.qns_type %>
             </div>
             <div class="col-md-2">
-              Required?
+              Required:
             </div>
             <div class="col-md-3">
-              <%= question.qns_type %>
+              <%= question.required %>
             </div>
           </div>
         </div>
@@ -31,6 +36,7 @@
           <%= link_to 'Edit', edit_formtemplate_question_path(formtemplate_id: question.form_template, id: question), class: "btn btn-primary" %>
           <%= link_to 'Delete', formtemplate_question_path(formtemplate_id: question.form_template, id: question), method: :delete, remote: true, class: "btn btn-primary" %>
         </div>
+
         <!--
         <table class="table">
           <tr>

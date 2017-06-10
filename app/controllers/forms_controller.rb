@@ -50,12 +50,12 @@ class FormsController < ApplicationController
     save_success = true
     params[:invalid_fields] = []
     values_cache = []
-    @form.questions.each_with_index do |question, index|
+    @form.questions.order('qns_no ASC').each_with_index do |question, index|
       params_symbol = ('q'+(index+1).to_s).to_sym
       @answer = question.answers.build(content: params[:form][params_symbol], form: @form)
       @answer.user = current_user
       values_cache << @answer.content
-      if !@answer.save
+      if !@answer.save || (question.required && @answer.nil?)
         flash[:notice] = "Please fill in required fields!"
         save_success = false
         params[:invalid_fields] << question.id

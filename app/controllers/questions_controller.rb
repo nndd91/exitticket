@@ -1,9 +1,27 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin
-  before_action :set_question, only: [:edit, :destroy, :update]
+  before_action :set_question, only: [:edit, :destroy, :update, :move_up, :move_down]
 
   def edit
+  end
+
+  def move_up
+    @formtemplate = FormTemplate.find(params[:formtemplate_id])
+    @question.qns_no -= 1
+    @question.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def move_down
+    @formtemplate = FormTemplate.find(params[:formtemplate_id])
+    @question.qns_no += 1
+    @question.save
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
@@ -39,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:label, :qns_type)
+    params.require(:question).permit(:label, :qns_type, :required, :qns_no)
   end
 
   def authenticate_admin
