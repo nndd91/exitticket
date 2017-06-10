@@ -3,11 +3,15 @@
 <%= simple_form_for @form do |f| %>
   <% if params[:form_template].nil? %>
     <%= f.association :form_template, collection: FormTemplate.all %>
+    <%= f.input :form_date, as: :date %>
+    <%= f.input :title %>
+    <%= f.input :description, as: :text %>
   <% else %>
+    <% @formtemplate = FormTemplate.find(params[:form_template]) %>
     <%= f.association :form_template, collection: FormTemplate.all, selected: params[:form_template] %>
+    <%= f.input :form_date, as: :date %>
+    <%= f.input :title, input_html: { value: @formtemplate.title.gsub(/template[s]?$/i, "") } %>
+    <%= f.input :description, as: :text, input_html: { value: @formtemplate.description } %>
   <% end %>
-  <%= f.input :form_date, as: :date %>
-  <%= f.input :title %>
-  <%= f.input :description, as: :text %>
   <%= f.button :submit %>
 <% end %>

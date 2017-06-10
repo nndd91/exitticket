@@ -2,7 +2,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h1><%= @form.title %></h1>
+    <%= @form.description %>
   </div>
+
 
   <% if flash[:notice] %>
     <div class="alert alert-warning" role="alert">
