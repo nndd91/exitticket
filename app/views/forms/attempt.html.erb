@@ -12,7 +12,8 @@
       <% if !params[:invalid_fields].nil? %>
         Required:
         <% params[:invalid_fields].each do |qns_id| %>
-           Q<%= Question.find(qns_id).qns_no %>,
+           Q<%= Question.find(qns_id).qns_no %>
+           <%= qns_id == params[:invalid_fields].last ? "" : "," %>
         <% end %>
       <% end %>
     </div>
