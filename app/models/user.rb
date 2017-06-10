@@ -10,9 +10,9 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { maximum: 30, minimum: 2 }, uniqueness: true
 
   # Associations
-  has_many :form_templates
-  has_many :forms
-  has_many :answers
-  has_many :logs
+  has_many :form_templates, dependent: :destroy
+  has_many :forms, dependent: :destroy
+  has_many :answers, dependent: :destroy
+  has_many :logs, dependent: :destroy
 end
 
