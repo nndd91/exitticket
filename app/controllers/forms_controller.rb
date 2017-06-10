@@ -43,7 +43,6 @@ class FormsController < ApplicationController
   end
 
   def attempt
-    byebug
   end
 
   def attempting
