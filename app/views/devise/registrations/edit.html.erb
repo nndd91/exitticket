@@ -6,6 +6,7 @@
       <%= f.error_notification %>
 
       <div class="form-inputs">
+        <%= f.input :username, required: true %>
         <%= f.input :first_name, required: true %>
         <%= f.input :last_name, required: true %>
         <%= f.input :email, required: true, autofocus: true %>
@@ -16,11 +17,18 @@
 
         <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
         <%= f.input :password_confirmation, required: false %>
-        <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
-      </div>
 
+      </div>
+      <hr>
       <div class="form-actions">
-        <%= f.button :submit, "Update" %>
+        <div class="row" style="display: flex; align-items: center; justify-content: space-between; ">
+          <div class="col-xs-9">
+            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+          </div>
+          <div class="col-xs-3" style="display:flex; justify-content: flex-end">
+            <%= f.button :submit, "Update" %>
+          </div>
+        </div>
       </div>
     <% end %>
 

@@ -2,7 +2,7 @@ class FormtemplatesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :authenticate_admin
-  before_action :set_formtemplates, only: [:show, :edit, :update, :destroy]
+  before_action :set_formtemplate, only: [:show, :edit, :update, :destroy]
 
   def index
     @formtemplates = FormTemplate.all
@@ -32,6 +32,7 @@ class FormtemplatesController < ApplicationController
   def update
     @formtemplate.update(formtemplate_params)
     @formtemplate.save
+    redirect_to edit_formtemplate_path(@formtemplate)
   end
 
   def destroy
@@ -41,7 +42,7 @@ class FormtemplatesController < ApplicationController
 
   private
 
-  def set_formtemplates
+  def set_formtemplate
     @formtemplate = FormTemplate.find(params[:id])
   end
 

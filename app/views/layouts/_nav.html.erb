@@ -1,9 +1,9 @@
 <nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
     </div>
 
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav navbar-left">
       <li><%= link_to 'Home', forms_path %></li>
       <% if user_signed_in? %>
         <li><%= link_to 'Forms', forms_path %></li>
@@ -11,6 +11,12 @@
           <li><%= link_to 'Form Templates', formtemplates_path %></li>
           <li><%= link_to 'Admin', rails_admin_path %></li>
         <% end %>
+      <% end %>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to "Welcome #{current_user.username}", edit_user_registration_path %></li>
         <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li><%= link_to 'Login', new_user_session_path %></li>

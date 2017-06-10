@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # Validations for additional fields
   validates :last_name, presence: true, length: { maximum: 30, minimum: 2 }
   validates :first_name, presence: true, length: { maximum: 30, minimum: 2 }
-  validates :username, presence: true, length: { maximum: 30, minimum: 2 }
+  validates :username, presence: true, length: { maximum: 30, minimum: 2 }, uniqueness: true
 
   # Associations
   has_many :form_templates
