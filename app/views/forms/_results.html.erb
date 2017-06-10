@@ -33,6 +33,13 @@
       </div>
     </div>
     <div class="panel-body">
+
+      <%# Graph if number %>
+      <% if question.qns_type == "1 to 5 Collection" %>
+        <%= column_chart question.answers.where(form: @form).group(:content).count %>
+      <% end %>
+      <h4> Total Answers: <%= question.answers.where(form: @form).count %></h4>
+      <%# Raw data %>
       <table class="table table-bordered">
         <tr>
           <th class="col-xs-1">

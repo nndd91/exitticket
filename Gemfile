@@ -83,3 +83,5 @@ gem 'rails_admin', '~> 1.2'
 gem 'bootstrap-sass'
 # Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
 gem "cocoon"
+# Create beautiful Javascript charts with one line of Ruby
+gem "chartkick"
