@@ -5,6 +5,9 @@
 <div class="panel panel-default">
   <table class="table">
     <tr>
+      <th class="col-xs-3">
+        Username
+      </th>
       <th>
         Name
       </th>
@@ -16,7 +19,10 @@
       <% @user = log.user %>
       <tr>
         <td>
-          <%= @user.first_name %>
+          <%= @user.username %>
+        </td>
+        <td>
+          <%= @user.first_name %> <%= user.last_name %>
         </td>
         <td>
           <%= log.created_at %>
@@ -29,6 +35,9 @@
 <div class="panel panel-default">
   <table class="table">
     <tr>
+      <th class="col-xs-3">
+        User
+      </th>
       <th>
         Name
       </th>
@@ -37,7 +46,10 @@
       <% if !@logs.exists?(user.id) %>
         <tr>
           <td>
-            <%= user.first_name %>
+            <%= user.username %>
+          </td>
+          <td>
+            <%= user.first_name %> <%= user.last_name %>
           </td>
         </tr>
       <% end %>
