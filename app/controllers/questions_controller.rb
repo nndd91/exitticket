@@ -76,6 +76,14 @@ class QuestionsController < ApplicationController
   def destroy
     @formtemplate = FormTemplate.find(params[:formtemplate_id])
     @question.destroy
+
+    # Need to set the question number of the other questions.
+    @questions = @formtemplate.questions.order('qns_no ASC')
+    @questions.each_with_index do |question, index|
+      question.qns_no = index + 1
+      question.save
+    end
+
     respond_to do |format|
       format.js
     end
