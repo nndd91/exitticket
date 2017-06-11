@@ -48,17 +48,17 @@ class FormsController < ApplicationController
   def attempting
     #array = [:q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9, :q10]
     save_success = true
-    invalid_fields = []
-    values_cache = []
+    @invalid_fields = []
+    @values_cache = []
     @form.questions.order('qns_no ASC').each_with_index do |question, index|
       params_symbol = ('q'+(index+1).to_s).to_sym
       @answer = question.answers.build(content: params[:form][params_symbol], form: @form)
       @answer.user = current_user
-      values_cache << @answer.content
+      @values_cache << @answer.content
       if (question.required && (@answer.content.nil? || @answer.content.empty?))
         flash[:notice] = "Please fill in required fields!"
         save_success = false
-        invalid_fields << question.id
+        @invalid_fields << question.id
       else
         @answer.save
       end
@@ -74,7 +74,7 @@ class FormsController < ApplicationController
       @answers.each do |answer|
         answer.destroy
       end
-      redirect_to attempt_form_path(values_cache: values_cache, invalid_fields: invalid_fields)
+      redirect_to attempt_form_path(values_cache: @values_cache, invalid_fields: @invalid_fields)
     end
   end
 

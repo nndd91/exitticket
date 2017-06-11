@@ -130,12 +130,53 @@ RSpec.describe FormsController, type: :controller do
       it { expect(assigns(:form)).to eq(forms[0]) }
     end
 
-
-
     describe 'attempting' do
+      let(:form_template) { create(:form_template, user: user) }
+      let!(:questions) { create_list(:question, 3, form_template: form_template) }
+      let!(:question) { create(:question, form_template: form_template, required: false ) }
+      let(:form) { create(:form, form_template: form_template) }
+
       before do
-        post :attempting
+        post :attempting, params: { id: form, form: params }
       end
+
+      context 'Test basic databse' do
+        let(:params){ attributes_for(:form) }
+        it { expect(User.count).to eq(2) }
+        it { expect(FormTemplate.count).to eq(1) }
+        it { expect(Question.count).to eq(4) }
+        it { expect(assigns(:form)).to eq(form) }
+        it { expect(Form.count).to eq(1) }
+        it { expect(form.questions.count).to eq(4) }
+      end
+      context 'Filling all fields' do
+        let(:params) { attributes_for(:form, q1: "answer1", q2: "answer2", q3: "answer3", q4: "answer4") }
+        it { expect(Answer.count).to eq(4) }
+        it { expect(Log.count).to eq(1) }
+        it { expect(Answer.all[0].content).to eq("answer1") }
+        it { expect(Answer.all[1].content).to eq("answer2") }
+        it { expect(Answer.all[2].content).to eq("answer3") }
+        it { expect(Answer.all[3].content).to eq("answer4") }
+      end
+
+      context 'Filling all required fields' do
+        let(:params) { attributes_for(:form, q1: "answer1", q2: "answer2", q3: "answer3") }
+        it { expect(Answer.count).to eq(4) }
+        it { expect(Answer.all[0].content).to eq("answer1") }
+        it { expect(Answer.all[1].content).to eq("answer2") }
+        it { expect(Answer.all[2].content).to eq("answer3") }
+        it { expect(Answer.all[3].content).to eq(nil) }
+        it { expect(Log.count).to eq(1) }
+      end
+
+      context 'Missing one required field' do
+        let(:params) { attributes_for(:form, q1: "answer1", q2: "answer2", q4: "answer4") }
+        it { expect(Answer.count).to eq(0) }
+        it { expect(assigns(:invalid_fields)).to eq([questions[2].id])}
+        it { expect(assigns(:values_cache)).to eq(["answer1", "answer2", nil, "answer4"]) }
+        it { expect(response).to redirect_to attempt_form_path(invalid_fields: [questions[2].id], values_cache: ["answer1", "answer2", nil, "answer4"])}
+      end
+
 
       #Need code here to test!
     end
