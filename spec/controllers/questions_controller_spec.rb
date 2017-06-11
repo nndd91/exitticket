@@ -79,5 +79,49 @@ RSpec.describe QuestionsController, type: :controller do
       it { expect(assigns(:formtemplate)).to eq(form_template) }
 
     end
+
+    describe 'Get move_up' do
+      # Already created:
+      # form_template, question, and admin
+      let(:form_template2){ create(:form_template, user: admin) }
+      let!(:question1){ create(:question, form_template: form_template2, qns_no: 1) }
+      let!(:question2){ create(:question, form_template: form_template2, qns_no: 2) }
+      let!(:question3){ create(:question, form_template: form_template2, qns_no: 3) }
+      let!(:question4){ create(:question, form_template: form_template2, qns_no: 4) }
+
+      before do
+        get :move_up, xhr: true, params: { formtemplate_id: form_template2, id: question3 }
+      end
+
+      it { expect(FormTemplate.count).to eq(2) }
+      it { expect(Question.count).to eq(5) }
+      it { expect(assigns(:formtemplate)).to eq(form_template2) }
+      it { expect(assigns(:question)).to eq(question3) }
+      it { expect(Question.find(question3.id).qns_no).to eq(2) }
+      it { expect(Question.find(question2.id).qns_no).to eq(3) }
+      it { expect(response).to render_template(:move_up) }
+    end
+
+    describe 'Get move_down' do
+      # Already created:
+      # form_template, question, and admin
+      let(:form_template2){ create(:form_template, user: admin) }
+      let!(:question1){ create(:question, form_template: form_template2, qns_no: 1) }
+      let!(:question2){ create(:question, form_template: form_template2, qns_no: 2) }
+      let!(:question3){ create(:question, form_template: form_template2, qns_no: 3) }
+      let!(:question4){ create(:question, form_template: form_template2, qns_no: 4) }
+
+      before do
+        get :move_down, xhr: true, params: { formtemplate_id: form_template2, id: question3 }
+      end
+
+      it { expect(FormTemplate.count).to eq(2) }
+      it { expect(Question.count).to eq(5) }
+      it { expect(assigns(:formtemplate)).to eq(form_template2) }
+      it { expect(assigns(:question)).to eq(question3) }
+      it { expect(Question.find(question3.id).qns_no).to eq(4) }
+      it { expect(Question.find(question4.id).qns_no).to eq(3) }
+      it { expect(response).to render_template(:move_down) }
+    end
   end
 end
