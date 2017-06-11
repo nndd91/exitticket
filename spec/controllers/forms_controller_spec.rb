@@ -176,9 +176,6 @@ RSpec.describe FormsController, type: :controller do
         it { expect(assigns(:values_cache)).to eq(["answer1", "answer2", nil, "answer4"]) }
         it { expect(response).to redirect_to attempt_form_path(invalid_fields: [questions[2].id], values_cache: ["answer1", "answer2", nil, "answer4"])}
       end
-
-
-      #Need code here to test!
     end
   end
 end
